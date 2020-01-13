@@ -48,4 +48,29 @@ public class UserHandler {
         queryWrapper.like("name","o");
         return userService.fingByQueryWrapper(queryWrapper);
     }
+    /**
+
+     *@descpriton   条件查询
+
+     *@parameter  查询条件，如Id等
+
+     *@return  数据的结果集
+
+     *@author  jacob
+
+     *@date  2020/01/13
+
+     *@Reviser  无
+
+     */
+    public List<User> find1(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        /**
+         *@descpriton   设置查询条件 K-V形式
+         *@parameter  年龄小于20
+         *
+         */
+        queryWrapper.le("age",20);
+        return userService.fingByQueryWrapper(queryWrapper);
+    }
 }
