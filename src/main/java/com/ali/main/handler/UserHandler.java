@@ -63,6 +63,7 @@ public class UserHandler {
      *@Reviser  无
 
      */
+    @RequestMapping("/find1")
     public List<User> find1(){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         /**
