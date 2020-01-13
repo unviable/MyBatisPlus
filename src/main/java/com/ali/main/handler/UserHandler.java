@@ -119,6 +119,11 @@ public class UserHandler {
         User user = new User();
         user.setId(1216694142372323329L);
         user.setName("jacob");
+        /**
+         *@descpriton   修改数据
+         *@parameter  实体类对象 只修改该对象有的数据，如果属性为null，则不修改该列的数据
+         *
+         */
         mapper.updateById(user);
     }
     @RequestMapping("/page")
