@@ -112,4 +112,11 @@ public class UserHandler {
         mapper.deleteById(1);
         System.out.println("删除成功！！");
     }
+    @RequestMapping("/update")
+    public void update(){
+        User user = new User();
+        user.setId("1216694142372323329L");
+        user.setName("jacob");
+        mapper.updateById(user);
+    }
 }
