@@ -4,6 +4,8 @@ import com.ali.main.mapper.UserMapper;
 import com.ali.main.pojo.User;
 import com.ali.main.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -115,8 +117,35 @@ public class UserHandler {
     @RequestMapping("/update")
     public void update(){
         User user = new User();
-        user.setId("1216694142372323329L");
+        user.setId(1216694142372323329L);
         user.setName("jacob");
         mapper.updateById(user);
+    }
+    @RequestMapping("/page")
+    public  void page(){
+        /**
+         *@descpriton   设置分页查询的参数
+         *@parameter  第一个参数是当前页 第二个参数是每页显示数
+         *
+         */
+        Page<User> page = new Page<>(1,2);
+        /**
+         *@descpriton   分页查询方法
+         *@parameter  第一个参数是关于分页的条件 第二个是对查询数据的条件
+         *
+         */
+        IPage<User> userIPage = mapper.selectPage(page, null);
+        System.out.println("总条数 ------> " + userIPage.getTotal());
+        System.out.println("当前页数 ------> " + userIPage.getCurrent());
+        System.out.println("当前每页显示数 ------> " + userIPage.getSize());
+        /**
+         *@descpriton   将查询结果返回为List封装的数据集
+         *@parameter
+         *
+         */
+        List<User> records = userIPage.getRecords();
+        for (User record : records) {
+            System.out.println(record);
+        }
     }
 }
