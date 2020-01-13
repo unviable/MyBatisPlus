@@ -1,5 +1,6 @@
 package com.ali.main.handler;
 
+import com.ali.main.mapper.UserMapper;
 import com.ali.main.pojo.User;
 import com.ali.main.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,6 +18,9 @@ import java.util.List;
 public class UserHandler {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserMapper mapper;
 
     @RequestMapping("/all")
     public List<User> all(){
@@ -73,5 +77,39 @@ public class UserHandler {
          */
         queryWrapper.le("age",20);
         return userService.fingByQueryWrapper(queryWrapper);
+    }
+
+    @RequestMapping("/findById")
+    public User findById(long id){
+        /**
+         *@descpriton   按Id查询
+         *@parameter  Id
+         *
+         */
+        return mapper.selectById(id);
+    }
+    @RequestMapping("/insert")
+    public void insert(){
+        User user = new User();
+        user.setAge(21);
+        user.setEmail("1132079225@qq.com");
+        user.setName("xiaoshuai");
+        /**
+         *@descpriton   新增数据
+         *@parameter  实体类对象
+         *
+         */
+        int count = mapper.insert(user);
+        System.out.println("新增数据成功！count>="+count);
+    }
+    @RequestMapping("/delete")
+    public void delete(){
+        /**
+         *@descpriton   按照Id删除数据
+         *@parameter  id
+         *
+         */
+        mapper.deleteById(1);
+        System.out.println("删除成功！！");
     }
 }
